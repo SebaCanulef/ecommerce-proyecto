@@ -1,0 +1,28 @@
+# Archivos de configuración sensibles
+/config/database.php
+
+# Directorio de subidas (excepto la imagen por defecto)
+/uploads/*
+!/uploads/default.jpg
+
+# Archivos temporales y de caché
+*.log
+*.cache
+*.tmp
+
+# Archivos de entorno local
+.env
+
+# Archivos generados por editores o IDEs
+*.swp
+*.swo
+.DS_Store
+.idea/
+.vscode/
+
+# Archivos de base de datos local
+*.sql
+*.sqlite
+
+# Archivos de sesión o generados por el servidor
+session/*
