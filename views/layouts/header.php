@@ -18,7 +18,6 @@
             <a class="navbar-brand" href="/ecommerce/index.php">Tienda</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav me-auto">
-                    <li class="nav-item"><a class="nav-link" href="/ecommerce/index.php">Productos</a></li>
                     <li class="nav-item"><a class="nav-link" href="/ecommerce/index.php?controller=cart&action=index">Carrito</a></li>
                     <?php if (isset($_SESSION['user'])): ?>
                         <li class="nav-item"><a class="nav-link" href="/ecommerce/index.php?controller=user&action=logout">Cerrar sesión (<?php echo htmlspecialchars($_SESSION['user']['username']); ?>)</a></li>

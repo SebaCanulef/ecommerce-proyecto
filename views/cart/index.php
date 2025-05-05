@@ -1,4 +1,5 @@
 <?php include 'views/layouts/header.php'; ?>
+
 <div class="container mt-4">
     <h1>Carrito de Compras</h1>
     <?php if (empty($cartItems)): ?>
