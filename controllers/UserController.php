@@ -1,22 +1,32 @@
 <?php
 require_once 'models/User.php';
 
-class UserController {
+class UserController
+{
     private $user;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->user = new User();
     }
 
     // Mostrar y procesar el formulario de login
-    public function login() {
+    public function login()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $password = filter_input(INPUT_POST, 'password', FILTER_SANITIZE_STRING);
             $user = $this->user->login($username, $password);
             if ($user) {
                 $_SESSION['user'] = $user;
-                header('Location: /ecommerce/index.php');
+
+                // Redirigir según el rol
+                if (isset($user['role']) && $user['role'] === 'admin') {
+                    header('Location: /ecommerce/index.php?controller=admin&action=index');
+                } else {
+                    header('Location: /ecommerce/index.php');
+                }
+
                 exit;
             } else {
                 $error = "Usuario o contraseña incorrectos";
@@ -26,7 +36,8 @@ class UserController {
     }
 
     // Mostrar y procesar el formulario de registro
-    public function register() {
+    public function register()
+    {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $username = filter_input(INPUT_POST, 'username', FILTER_SANITIZE_STRING);
             $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_EMAIL);
@@ -42,11 +53,11 @@ class UserController {
     }
 
     // Cerrar sesión
-    public function logout() {
+    public function logout()
+    {
         unset($_SESSION['user']);
         session_destroy();
         header('Location: /ecommerce/index.php');
         exit;
     }
 }
-?>
